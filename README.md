@@ -22,7 +22,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'rspec_compose_context'
+
+    RSpec.describe "sum" do
+      shared_context 'a' do |value|
+        let :a do
+          value
+        end
+      end
+
+      shared_context 'b' do |value|
+        let :b do
+          value
+        end
+      end
+
+      shared_examples_for 'e' do
+        it { is_expected.to eq 3 }
+      end
+
+      compose_context [:a, 1], [:b, 2], :e do
+        subject do
+          a + b
+        end
+      end
+    end
+
 
 ## Development
 
@@ -32,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rspec_compose_context.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nanki/rspec_compose_context.
 
 
 ## License
